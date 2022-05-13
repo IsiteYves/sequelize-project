@@ -81,7 +81,9 @@ exports.updateUser = async (req, res) => {
         await User.update(
           { name, age, address },
           { where: { id: req.params.id } }
-        ).then((updatedUser) => res.status(200).json(updatedUser));
+        ).then((updatedUser) =>
+          res.status(200).send("Successfully updated the user.")
+        );
       } else
         res.status(404).send({ message: "User with that id doesn't exist" });
     });

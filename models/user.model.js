@@ -39,6 +39,20 @@ function validateUser(req, res, next) {
     res.status(400).send({ message: "Error while validating User object" });
   }
 }
+function validateUserUpdate(req, res, next) {
+  try {
+    const schema = Joi.object({
+      name: Joi.string().min(3).max(200).required(),
+      age: Joi.number().min(6).max(150).required(),
+      address: Joi.string().min(10).max(150).required(),
+    });
+    const { error } = schema.validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+    next();
+  } catch {
+    res.status(400).send({ message: "Error while validating User object" });
+  }
+}
 function validateLogin(req, res, next) {
   try {
     const schema = Joi.object({
@@ -63,5 +77,6 @@ exports.generateAuthToken = function (user) {
 
 module.exports.User = User;
 exports.validateUser = validateUser;
+exports.validateUserUpdate = validateUserUpdate;
 exports.validateLogin = validateLogin;
 exports.generateAuthToken = this.generateAuthToken;

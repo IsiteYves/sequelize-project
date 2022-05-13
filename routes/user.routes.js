@@ -9,7 +9,11 @@ const express = require("express"),
   } = require("../controllers/user.controller"),
   router = express(),
   authenticate = require("../middlewares/auth.middleware"),
-  { validateUser, validateLogin } = require("../models/user.model");
+  {
+    validateUser,
+    validateUserUpdate,
+    validateLogin,
+  } = require("../models/user.model");
 
 router.get("/", getAllUsers);
 
@@ -19,7 +23,7 @@ router.post("/login", validateLogin, Login);
 
 router.post("/", validateUser, createNewUser);
 
-router.patch("/", validateUser, updateUser);
+router.patch("/:id", validateUserUpdate, updateUser);
 
 router.delete("/:id", authenticate, deleteUser);
 

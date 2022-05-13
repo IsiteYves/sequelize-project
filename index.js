@@ -1,6 +1,9 @@
 const express = require("express"),
   bodyParser = require("body-parser"),
-  db = require("./config/db.config");
+  db = require("./config/db.config"),
+  dotenv = require("dotenv");
+
+dotenv.config({ path: "./.env" });
 
 const app = express();
 
