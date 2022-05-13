@@ -4,6 +4,7 @@ const express = require("express"),
     getSpecificUser,
     createNewUser,
     updateUser,
+    Login,
     deleteUser,
   } = require("../controllers/user.controller"),
   router = express(),
@@ -14,10 +15,12 @@ router.get("/", getAllUsers);
 
 router.get("/:id", authenticate, getSpecificUser);
 
+router.post("/login", validateLogin, Login);
+
 router.post("/", validateUser, createNewUser);
 
 router.patch("/", validateUser, updateUser);
 
-router.delete("/:id");
+router.delete("/:id", authenticate, deleteUser);
 
 module.exports = router;

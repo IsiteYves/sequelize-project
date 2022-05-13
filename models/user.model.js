@@ -5,7 +5,7 @@ const Sequelize = require("sequelize"),
   jwt = require("jsonwebtoken");
 Joi.objectId = require("joi-objectid")(Joi);
 
-const User = db.define("gig", {
+const User = db.define("user", {
   name: {
     type: Sequelize.STRING,
   },
@@ -52,11 +52,11 @@ function validateLogin(req, res, next) {
     res.status(400).send({ message: "Error validating Login info" });
   }
 }
-userSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign(
-    { id: this.id, email: this.email },
-    process.env.JWT_KEY
-  );
+
+exports.generateAuthToken = function (user) {
+  const { id, email } = user;
+  console.log("..key..", process.env.JWT_KEY);
+  const token = jwt.sign({ id, email }, process.env.JWT_KEY);
   const finalToken = "Bearer " + token;
   return finalToken;
 };
@@ -64,3 +64,4 @@ userSchema.methods.generateAuthToken = function () {
 module.exports.User = User;
 exports.validateUser = validateUser;
 exports.validateLogin = validateLogin;
+exports.generateAuthToken = this.generateAuthToken;
