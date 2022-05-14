@@ -36,7 +36,7 @@ router.get("/", getAllUsers);
 
 /**
  * @swagger
- * /api/users/{userId}:
+ * /api/users/{id}:
  *   get:
  *     tags: [USER MANAGEMENT MODULE]
  *     description: Get a specific user by his/her id
@@ -47,7 +47,7 @@ router.get("/", getAllUsers);
  *         type: string
  *         in: header
  *         required: true
- *       - name: userId
+ *       - name: id
  *         description: The specific user's id
  *         type: string
  *         in: path
@@ -113,16 +113,16 @@ router.post("/login", validateLogin, Login);
  *         type: string
  *         in: formData
  *         required: true
+ *       - name: age
+ *         description: Age of the new user
+ *         type: number
+ *         in: formData
+ *         required: true
  *       - name: address
  *         description: Address of the new user (Format - Country, State/Province, District/City)
  *         type: string
  *         in: formData
  *         required: true
- *       - name: age
- *         description: Age of the new user
- *         type: number
- *         in: formData
- *         required: false
  *       - name: password
  *         description: Password of the new user
  *         type: string
@@ -159,27 +159,17 @@ router.post("/", validateUser, createNewUser);
  *         in: header
  *         required: true
  *       - name: name
- *         description: Name of the new user
- *         type: string
- *         in: formData
- *         required: true
- *       - name: email
- *         description: Email of the new user
- *         type: string
- *         in: formData
- *         required: true
- *       - name: address
- *         description: Address of the new user (Format - Country, State/Province, District/City)
+ *         description: New name for the user
  *         type: string
  *         in: formData
  *         required: true
  *       - name: age
- *         description: Age of the new user
+ *         description: New value for age of the user
  *         type: number
  *         in: formData
- *         required: false
- *       - name: password
- *         description: Password of the new user
+ *         required: true
+ *       - name: address
+ *         description: New address for the user (Format - Country, State/Province, District/City)
  *         type: string
  *         in: formData
  *         required: true
