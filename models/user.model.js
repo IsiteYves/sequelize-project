@@ -69,7 +69,6 @@ function validateLogin(req, res, next) {
 
 exports.generateAuthToken = function (user) {
   const { id, email } = user;
-  console.log("..key..", process.env.JWT_KEY);
   const token = jwt.sign({ id, email }, process.env.JWT_KEY);
   const finalToken = "Bearer " + token;
   return finalToken;
